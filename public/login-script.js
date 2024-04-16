@@ -14,11 +14,12 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
             body: JSON.stringify({ username, password })
         });
         const data = await response.json();
-        alert(data.message);
-
-        // Update result after successful login
-        if (data.message === 'Login success') {
+        localStorage.setItem('token', data.token);
+        if (response.ok && data.token) { //check if response is ok and token is present, and if account is admin
+            alert('Login successful!');
             window.location.href = 'user-management.html';
+        } else {
+            alert('Login failed, only admin can login.');
         }
     } catch (error) {
         console.error('Error:', error);

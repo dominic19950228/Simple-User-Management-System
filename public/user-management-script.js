@@ -3,15 +3,39 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchUsers();
 
     // Function to fetch user data
-    async function fetchUsers() {
-        try {
-            const response = await fetch('/api/users?' + new URLSearchParams({ refresh: Math.random() }));
-            const data = await response.json();
-            renderUsers(data);
-        } catch (error) {
-            console.error('Error fetching users:', error);
+async function fetchUsers() {
+    try {
+        // Check if token exists in localStorage
+        const token = localStorage.getItem('token');
+        
+        // If token exists, fetch user data with token
+        if (token) {
+            const response = await fetch('/api/users?' + new URLSearchParams({ refresh: Math.random() }), {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            // If response is ok, render the user data
+            if (response.ok) {
+                const data = await response.json();
+                renderUsers(data);
+            } else {
+                // If response is not ok, handle the error
+                console.error('Error fetching users:', response.status);
+                if (response.status === 401) {
+                    // Unauthorized access, redirect to login page
+                    window.location.href = '/index.html';
+                }
+            }
+        } else {
+            // If token does not exist, redirect to login page
+            window.location.href = '/index.html';
         }
+    } catch (error) {
+        console.error('Error fetching users:', error);
     }
+}
     
     // Function to format date string
     function formatDateString(dateString) {
