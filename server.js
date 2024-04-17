@@ -49,8 +49,8 @@ app.post('/api/login', (req, res) => {
     });
 });
 
-// Protected route requiring token
-app.get('/protected', verifyToken, (req, res) => {
+// RESTful API endpoint to retrieve user data from MySQL database
+app.get('/api/users', verifyToken, (req, res) => {
     jwt.verify(req.token, secretKey, (err, authData) => {
         if (err) {
             if (err.name === 'TokenExpiredError') {
@@ -59,45 +59,23 @@ app.get('/protected', verifyToken, (req, res) => {
                 res.status(403).json({ message: 'Invalid token' });
             }
         } else {
-            res.json({
-                message: 'Protected data',
-                authData
+            // Query to select name, email, role, lastActive from users table
+            const query = 'SELECT id, name, email, role, lastActive FROM users';
+
+            // Execute the query
+            connection.query(query, (err, results) => {
+                if (err) {
+                    console.error('Error querying database:', err);
+                    res.status(500).json({ message: 'Internal server error' });
+                    return;
+                }
+                // Send the retrieved user data as JSON response
+                res.status(200).json(results);
             });
         }
     });
 });
 
-// Token verification middleware
-function verifyToken(req, res, next) {
-    // Get token from header
-    const bearerHeader = req.headers['authorization'];
-    if (typeof bearerHeader !== 'undefined') {
-        const bearer = bearerHeader.split(' ');
-        const bearerToken = bearer[1];
-        req.token = bearerToken;
-        next();
-    } else {
-        // No token
-        res.sendStatus(403);
-    }
-}
-
-// RESTful API endpoint to retrieve user data from MySQL database
-app.get('/api/users', (req, res) => {
-    // Query to select name, email, role, lastActive from users table
-    const query = 'SELECT id, name, email, role, lastActive FROM users';
-
-    // Execute the query
-    connection.query(query, (err, results) => {
-        if (err) {
-            console.error('Error querying database:', err);
-            res.status(500).json({ message: 'Internal server error' });
-            return;
-        }
-        // Send the retrieved user data as JSON response
-        res.status(200).json(results);
-    });
-});
 
 // RESTful API endpoint to update user data in MySQL database
 app.post('/api/users/:id', (req, res) => {
