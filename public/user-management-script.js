@@ -23,7 +23,7 @@ async function fetchUsers() {
             } else {
                 // If response is not ok, handle the error
                 console.error('Error fetching users:', response.status);
-                if (response.status === 401) {
+                if (response.status === 403) {
                     // Unauthorized access, redirect to login page
                     window.location.href = '/index.html';
                 }
@@ -145,6 +145,14 @@ async function fetchUsers() {
         });
 
     }
+
+    // Handle click event on logout button
+    document.getElementById('logout-btn').addEventListener('click', () => {
+        // Remove token from local storage
+        localStorage.removeItem('token');
+        // Redirect user to login page
+        window.location.href = '/index.html';
+    });
 
     // Handle click event on delete button
     function handleDelete(event) {
