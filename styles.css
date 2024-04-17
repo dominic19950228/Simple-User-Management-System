@@ -1,0 +1,142 @@
+/* Set the modal dialog to be hidden and apply visual effects */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modalLogin {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Center the modal dialog */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+.modal-buttons {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+/* Position the close button in the top-right corner */
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.input-group {
+    margin-bottom: 10px;
+}
+
+.input-group label {
+    display: inline-block;
+    width: 80px;
+}
+
+.input-group input {
+    width: calc(40%);
+}
+
+#sidebar {
+    width: 200px;
+    height: 100vh;
+    background-color: #f0f0f0;
+    float: left;
+    padding: 20px;
+}
+#main {
+    margin-left: 220px;
+    padding: 20px;
+    padding-left: 50px;
+}
+#main h1 {
+    color: #333;
+}
+#main input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+#main button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#main table {
+    width: 100%;
+    border-collapse: collapse;
+}
+#main table th, #main table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+#main table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Add button styles */
+.sidebar-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 26px;
+}
+
+#logout-btn {
+    position: fixed;
+    bottom: 20px; 
+    z-index: 9999; 
+}
+
+/* Set spacing between buttons */
+#sidebar ul li:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+#user-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+#user-table th, #user-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+#user-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <div id="sidebar"><!-- Sidebar -->
+        <ul>
+            <button class="sidebar-btn">People</button>
+            <button class="sidebar-btn">Teams</button>
+            <button class="sidebar-btn">Settings</button>
+            <button id="logout-btn" class="sidebar-btn">Logout</button><!-- Logout button -->
+        </ul>
+    </div>
+    <!-- Main content area -->
+    <div id="main">
+        <h1>Manage People</h1>
+        <input type="text" id="search" placeholder="Search by name or email">
+        
+        <!-- User table -->
+        <table id="user-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Last Active</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- User data displayed here -->
+            </tbody>
+        </table>
+    </div>
+    <!-- Modal for editing user -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Edit User</h2>
+            <!-- Edit user form -->
+            <div class="input-group">
+                <label for="edit-name">Name:</label>
+                <input type="text" id="edit-name" placeholder="Name">
+            </div>
+            <div class="input-group">
+                <label for="edit-email">Email:</label>
+                <input type="email" id="edit-email" placeholder="Email">
+            </div>
+            <div class="input-group">
+                <label for="edit-role">Role:</label>
+                <input type="text" id="edit-role" placeholder="Role">
+            </div>
+            <div class="input-group">
+                <label for="edit-lastActive">Last Active:</label>
+                <input type="date" id="edit-lastActive" placeholder="Last Active">
+            </div>
+            <br><br>
+            <!-- Confirmation button -->
+            <div class="modal-buttons">
+                <button id="confirm-edit" class="main button">Confirm</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript file for user management -->
+    <script src="user-management-script.js"></script>
+</body>
+</html>
